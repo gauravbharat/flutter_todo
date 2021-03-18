@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AddTaskScreen extends StatelessWidget {
+  final Function callBack;
+  final TextEditingController controller;
+  AddTaskScreen({this.callBack, this.controller});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,9 +35,10 @@ class AddTaskScreen extends StatelessWidget {
               keyboardType: TextInputType.text,
               autofocus: true,
               textAlign: TextAlign.center,
+              controller: controller,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: callBack,
               style: ButtonStyle(
                   // backgroundColor: Colors.lightBlueAccent,
                   ),
