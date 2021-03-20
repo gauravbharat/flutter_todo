@@ -41,7 +41,7 @@ class AddTaskScreen extends StatelessWidget {
               onPressed: () {
                 Provider.of<Data>(context, listen: false)
                     .addTask(taskName: controller.text);
-                controller.clear();
+                Navigator.pop(context);
               },
               style: ButtonStyle(
                   // backgroundColor: Colors.lightBlueAccent,
