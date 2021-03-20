@@ -1,22 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todoey/models/task.dart';
+import 'package:flutter_todoey/models/data.dart';
 import 'package:flutter_todoey/screens/add_task_screen.dart';
-import 'package:flutter_todoey/widgets/task_tile.dart';
 import 'package:flutter_todoey/widgets/tasks_list.dart';
+import 'package:provider/provider.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-final controller = TextEditingController();
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-  ];
+class TasksScreen extends StatelessWidget {
+  final controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +41,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider.of<Data>(context).taskCount} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -71,7 +60,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TasksList(tasks),
+              child: TasksList(),
             ),
           ),
         ],
@@ -84,15 +73,7 @@ class _TasksScreenState extends State<TasksScreen> {
             context: context,
             isScrollControlled: true,
             builder: (context) => SingleChildScrollView(
-              child: AddTaskScreen(
-                controller: controller,
-                callBack: () {
-                  setState(() {
-                    tasks.add(Task(name: controller.text));
-                  });
-                  controller.clear();
-                },
-              ),
+              child: AddTaskScreen(),
             ),
           );
         },
