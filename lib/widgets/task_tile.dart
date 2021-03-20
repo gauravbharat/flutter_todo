@@ -10,20 +10,22 @@ class TaskTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
         builder: (BuildContext context, Data taskData, Widget child) {
+      final taskName = taskData.tasks[index].name;
+      final taskIsChecked = taskData.tasks[index].isDone;
       return ListTile(
+        onLongPress: () {
+          taskData.deleteTask(taskIndex: index);
+        },
         title: Text(
-          taskData.tasks[index].name,
+          taskName,
           style: TextStyle(
-              decoration: taskData.tasks[index].isDone
-                  ? TextDecoration.lineThrough
-                  : null),
+              decoration: taskIsChecked ? TextDecoration.lineThrough : null),
         ),
         trailing: Checkbox(
           activeColor: Colors.lightBlueAccent,
-          value: taskData.tasks[index].isDone,
+          value: taskIsChecked,
           onChanged: (bool checkboxState) {
-            Provider.of<Data>(context, listen: false)
-                .updateTask(taskIndex: index);
+            taskData.updateTask(taskIndex: index);
           },
         ),
       );
