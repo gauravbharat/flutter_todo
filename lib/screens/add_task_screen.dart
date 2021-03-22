@@ -37,18 +37,21 @@ class AddTaskScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               controller: controller,
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
-                Provider.of<Data>(context, listen: false)
-                    .addTask(taskName: controller.text);
-                Navigator.pop(context);
+                if (controller.text.isNotEmpty) {
+                  Provider.of<Data>(context, listen: false)
+                      .addTask(taskName: controller.text);
+                  Navigator.pop(context);
+                }
               },
               style: ButtonStyle(
-                  // backgroundColor: Colors.lightBlueAccent,
-                  ),
+                backgroundColor:
+                    MaterialStateProperty.all(Colors.lightBlueAccent),
+              ),
               child: Text(
                 'Add',
-                style: TextStyle(color: Colors.lightBlueAccent),
+                style: TextStyle(color: Colors.white),
               ),
             )
           ],
